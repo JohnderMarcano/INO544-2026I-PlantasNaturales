@@ -44,6 +44,7 @@ venv.bak/
 # Se ignora la carpeta local de imágenes para no saturar GitHub
 /data/
 /dataset/
+/procesadas/
 *.zip
 *.tar.gz
 *.rar

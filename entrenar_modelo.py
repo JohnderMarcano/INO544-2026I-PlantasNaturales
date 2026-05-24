@@ -1,6 +1,8 @@
 import tensorflow as tf
 from tensorflow.keras import layers, models
 import tf2onnx
+import matplotlib.pyplot as plt
+import os
 
 # 1. RUTA 
 ruta_dataset = './procesadas'
@@ -55,10 +57,44 @@ historial = modelo.fit(
 )
 
 print("\nFase 4: Exportando a ONNX v12+...")
-# Especificaciones de la pizarra para ONNX
+
+os.makedirs('model', exist_ok=True)
+
+# Especificaciones para ONNX
 spec = (tf.TensorSpec((None, 224, 224, 3), tf.float32, name="cam_input"),)
-output_path = "./modelo_plantas.onnx"
+output_path = "./model/modelo_plantas.onnx"
 
 tf2onnx.convert.from_keras(modelo, input_signature=spec, opset=13, output_path=output_path)
 
 print(f"\n¡CORONAMOS! Modelo guardado exitosamente en: {output_path}")
+
+# --- FASE 5: GENERACIÓN DE GRÁFICAS 
+print("\nFase 5: Generando gráfica de rendimiento para el README...")
+os.makedirs('src', exist_ok=True) 
+
+plt.figure(figsize=(12, 5))
+
+# Gráfica de Precisión (Accuracy)
+plt.subplot(1, 2, 1)
+plt.plot(historial.history['accuracy'], label='Entrenamiento', color='green')
+plt.plot(historial.history['val_accuracy'], label='Validación (Test)', color='blue', linestyle='--')
+plt.title('Curva de Precisión (Accuracy)')
+plt.xlabel('Épocas (Epochs)')
+plt.ylabel('Precisión')
+plt.legend()
+plt.grid(True, linestyle=':', alpha=0.7)
+
+# Gráfica de Pérdida (Loss)
+plt.subplot(1, 2, 2)
+plt.plot(historial.history['loss'], label='Entrenamiento', color='red')
+plt.plot(historial.history['val_loss'], label='Validación (Test)', color='orange', linestyle='--')
+plt.title('Curva de Pérdida (Loss / Error)')
+plt.xlabel('Épocas (Epochs)')
+plt.ylabel('Pérdida (Binary Crossentropy)')
+plt.legend()
+plt.grid(True, linestyle=':', alpha=0.7)
+
+# Guardar la imagen en la carpeta src
+plt.tight_layout()
+plt.savefig('src/grafica_rendimiento.png', dpi=300)
+print("✅ ¡Gráfica guardada exitosamente en src/grafica_rendimiento.png!")
