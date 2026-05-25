@@ -66,19 +66,24 @@ El modelo se ha homologado bajo los estándares requeridos por la interfaz centr
 Para replicar el despliegue del modelo y la interfaz:
 
 1. Clonar el repositorio:
-   ```bash
+   bash
    git clone [https://github.com/JohnderMarcano/INO544-2026I-PlantasNaturales.git]
 
 2.Acceder al directorio:
-```bash
+   bash
     cd INO544-2026I-PlantasNaturales
 
 3. Instalar las dependencias requeridas:
-    ```bash
+   bash
     pip install -r requirements.txt
 
 4. Ejecutar la interfaz de usuario:
-   ```bash
+    ```bash
     streamlit run app.py 
-4. Ejecutar la interfaz de usuario:
-    streamlit run app.py    
+
+
+
+
+
+
+
