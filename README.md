@@ -69,7 +69,7 @@ Para replicar el despliegue del modelo y la interfaz:
     ```bash
    git clone [https://github.com/JohnderMarcano/INO544-2026I-PlantasNaturales.git]
 
-2.Acceder al directorio:
+2. Acceder al directorio:
     ```bash
     cd INO544-2026I-PlantasNaturales
 
