@@ -2,4 +2,6 @@ streamlit
 Pillow
 numpy
 onnxruntime
-
+opencv-python
+av
+streamlit-webrtc
